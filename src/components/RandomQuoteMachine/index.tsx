@@ -2,14 +2,13 @@ import React from 'react';
 
 import QuoteComponent from './QuoteComponent'
 
-type quotesDataType = {
-    quotes ?: any
-}
 interface IProps {
 }
 
 interface IState {
     quotesData ?: any
+    currentQuote ?: any,
+    currentBackgroundColor:string
 }
 
 class RandomQuoteMachine extends React.Component<IProps, IState>{
@@ -17,11 +16,14 @@ class RandomQuoteMachine extends React.Component<IProps, IState>{
     constructor(props:IProps){
         super(props);
         this.state ={
-            quotesData: {}
+            quotesData: {},
+            currentQuote:{},
+            currentBackgroundColor : '#16a085'
         }
     }
 
     componentDidMount = () =>{
+        document.title = "Random Quotes";
         this.getQuotesData();
     }
 
@@ -30,7 +32,7 @@ class RandomQuoteMachine extends React.Component<IProps, IState>{
             .then(res => res.json())
             .then((data) => {
                 this.setState({quotesData: data});
-                console.log(data);
+                this.getRandomQuote();
             })
             .catch((e) => {
                console.log(e);
@@ -39,20 +41,22 @@ class RandomQuoteMachine extends React.Component<IProps, IState>{
 
     getRandomQuote = () =>{
         const {quotesData} = this.state;
-        console.log("random",quotesData)
+        const colors = ['#16a085', '#27ae60', '#2c3e50', '#f39c12', '#e74c3c', '#9b59b6', '#FB6964', '#342224', "#472E32", "#BDBB99", "#77B1A9", "#73A857"];
         if(quotesData.quotes !== undefined){
-            return quotesData.quotes[Math.floor(Math.random() * quotesData.quotes.length)];
-        }else{
-            return;
+            const randomColor = colors[Math.floor(Math.random() * colors.length)]
+            const randomQuote = quotesData.quotes[Math.floor(Math.random() * quotesData.quotes.length)];
+            this.setState({currentQuote: randomQuote,})
         }
     }
 
     render(){
-        const quote = this.getRandomQuote();
-        console.log(quote);
+        const {currentQuote,currentBackgroundColor} = this.state;
         return(
-            <div className="h-screen bg-gray-700">
-               
+            <div className="min-h-screen flex flex-wrap justify-center items-center bg-gray-300" style={{backgroundColor: currentBackgroundColor}}>
+               {currentQuote !==undefined &&
+                <QuoteComponent quote={currentQuote} getRandomQuote={this.getRandomQuote}/>
+                }
+                <p className="w-full text-center mb-auto font-semi-bold text-sm">by Anil</p>
             </div>
         )
     }
