@@ -45,7 +45,7 @@ class RandomQuoteMachine extends React.Component<IProps, IState>{
         if(quotesData.quotes !== undefined){
             const randomColor = colors[Math.floor(Math.random() * colors.length)]
             const randomQuote = quotesData.quotes[Math.floor(Math.random() * quotesData.quotes.length)];
-            this.setState({currentQuote: randomQuote,})
+            this.setState({currentQuote: randomQuote,currentBackgroundColor:randomColor})
         }
     }
 
@@ -54,7 +54,7 @@ class RandomQuoteMachine extends React.Component<IProps, IState>{
         return(
             <div className="min-h-screen flex flex-wrap justify-center items-center bg-gray-300" style={{backgroundColor: currentBackgroundColor}}>
                {currentQuote !==undefined &&
-                <QuoteComponent quote={currentQuote} getRandomQuote={this.getRandomQuote}/>
+                <QuoteComponent quote={currentQuote} currentBackgroundColor = {currentBackgroundColor} getRandomQuote={this.getRandomQuote}/>
                 }
                 <p className="w-full text-center mb-auto font-semi-bold text-sm">by Anil</p>
             </div>
