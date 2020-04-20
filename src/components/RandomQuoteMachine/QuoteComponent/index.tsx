@@ -18,8 +18,8 @@ class QuoteComponent extends React.Component<QuoteComponentProps>{
                 <p id="text" className="text-2xl h-full font-semi-bold "><span className="text-4xl font-bold">“ </span>{quote.quote}</p>
                 <div id="author" className="text-lg flex justify-end ">- {quote.author}</div>
                 <div className="flex justify-between items-center mt-5">
-                <a href="/" className="p-2 text-center rounded focus:outline-none text-white text-2xl" style={{backgroundColor:currentBackgroundColor}}><IoLogoTwitter></IoLogoTwitter></a>
-                <button onClick={this.getNewQuote} id="new_quote" className="bg-green-600 p-2 focus:outline-none rounded font-semi-bold text-white" style={{backgroundColor:currentBackgroundColor}}>New quote</button>
+                <a id="tweet-quote" href="twitter.com/intent/tweet" className="p-2 text-center rounded focus:outline-none text-white text-2xl" style={{backgroundColor:currentBackgroundColor}}><IoLogoTwitter></IoLogoTwitter></a>
+                <button id="new-quote" onClick={this.getNewQuote}  className="bg-green-600 p-2 focus:outline-none rounded font-semi-bold text-white" style={{backgroundColor:currentBackgroundColor}}>New quote</button>
                 </div>
             </div>
         )
